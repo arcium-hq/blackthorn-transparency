@@ -1,0 +1,18 @@
+{
+  "format": "blackthorn-release/1",
+  "policy_sha256": "9525ccb985ba5b83751826231a9dbcf4f2e198ddbef3423fd60543d338a6b7be",
+  "parties": [
+    "1b883e5e7630dbdaadf98b3e8af085b361fcdb9536be60766c483650e2fad6e1",
+    "3949a1c05ed361a648c28efa0e8d09584e413f25daa4589699a869dffeb7d58e",
+    "78f340eb309ceeac89bfadf8ba7395f944b99696c4da65df0fffcf3b110c1c3b"
+  ],
+  "hosts": [
+    "bt-api-h3.arcium.com",
+    "bt-api.arcium.com"
+  ],
+  "models": [
+    "34a1dde68b39bba474caceb334bedb57f2a6fdc8aff61e83096ca06622d12262"
+  ],
+  "source_revision": "a4ffdd9",
+  "released": "2026-11-25"
+}
