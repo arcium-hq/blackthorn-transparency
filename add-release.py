@@ -2,8 +2,10 @@
 """Add one release to the log: policies/<digest>/policy.txt and statement.json.
 Pushing them to main signs the statement (.github/workflows/sign.yml).
 
-Usage: add-release.py POLICY_TEXT ROSTER_JSON --host H [--host H...] --model DIGEST [--model ...]
+Usage: add-release.py POLICY_TEXT ROSTER_JSON --host H [--host H...] --model DIGEST=NAME [--model ...]
                       --source-revision REV [--released YYYY-MM-DD]
+A model is its weights digest (blackthorn-verify's sha256 tree) and the name it
+is published under.
 POLICY_TEXT is the text the host serves at /v1/attestation/policy (and the
 parties enforce); ROSTER_JSON the parties' identities.json."""
 import argparse
@@ -19,7 +21,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("policy")
 parser.add_argument("roster")
 parser.add_argument("--host", action="append", required=True)
-parser.add_argument("--model", action="append", required=True)
+parser.add_argument("--model", action="append", required=True, metavar="DIGEST=NAME")
 parser.add_argument("--source-revision", required=True)
 parser.add_argument("--released", default=datetime.date.today().isoformat())
 args = parser.parse_args()
@@ -27,7 +29,8 @@ args = parser.parse_args()
 text = open(args.policy, "rb").read()
 digest = hashlib.sha256(POLICY_DOMAIN + text).hexdigest()
 parties = json.load(open(args.roster))["parties"]
-for key in parties + args.model:
+models = dict(m.split("=", 1) for m in args.model)
+for key in parties + list(models):
     bytes.fromhex(key)
     assert len(key) == 64, key
 statement = {
@@ -35,7 +38,8 @@ statement = {
     "policy_sha256": digest,
     "parties": parties,
     "hosts": sorted(args.host),
-    "models": args.model,
+    "models": list(models),
+    "model_names": models,
     "source_revision": args.source_revision,
     "released": args.released,
 }

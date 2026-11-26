@@ -19,6 +19,15 @@ policies/<policy sha256>/
   statement.sigstore.json the Sigstore bundle: certificate, signature, Rekor entry
 ```
 
+## Models
+
+A statement names each model by its weights digest: blackthorn-verify's SHA-256 tree over the exported FP8 weights, which the engine computes on the GPU when it starts. Statements from 2026-11-26 on also carry the names (`model_names`). The digests so far:
+
+| Weights digest | Model |
+| --- | --- |
+| `34a1dde68b39bba474caceb334bedb57f2a6fdc8aff61e83096ca06622d12262` | Qwen 3.8 27B Abliterated, FP8 (`qwen3.8-27b-bllm`) |
+| `2844a322ec7b9d7811fc061b70b928dceb21d02d77151a4dfab96bdf65eed1cd` | Qwen 3.8 27B, FP8 |
+
 `<policy sha256>` is the digest the parties sign: SHA-256 over `bllm gateway policy v1`, a zero byte, then `policy.txt`.
 
 ```sh
@@ -47,7 +56,7 @@ It shows that every policy and set of party keys the client accepts was publishe
 ## Adding a release
 
 ```sh
-./add-release.py POLICY_TEXT identities.json --host bt-api.arcium.com --model <weights digest> --source-revision <rev>
+./add-release.py POLICY_TEXT identities.json --host bt-api.arcium.com --model '<weights digest>=<name>' --source-revision <rev>
 git add policies && git commit && git push
 ```
 
