@@ -1,0 +1,21 @@
+{
+  "format": "blackthorn-release/1",
+  "policy_sha256": "287342876250635a59e48d12c346b17aab9c2b656529f533bca93e9831ae1e41",
+  "parties": [
+    "1b883e5e7630dbdaadf98b3e8af085b361fcdb9536be60766c483650e2fad6e1",
+    "3949a1c05ed361a648c28efa0e8d09584e413f25daa4589699a869dffeb7d58e",
+    "78f340eb309ceeac89bfadf8ba7395f944b99696c4da65df0fffcf3b110c1c3b"
+  ],
+  "hosts": [
+    "bt-api-h3.arcium.com",
+    "bt-api.arcium.com"
+  ],
+  "models": [
+    "34a1dde68b39bba474caceb334bedb57f2a6fdc8aff61e83096ca06622d12262"
+  ],
+  "model_names": {
+    "34a1dde68b39bba474caceb334bedb57f2a6fdc8aff61e83096ca06622d12262": "Qwen 3.8 27B Abliterated, FP8 (qwen3.8-27b-bllm)"
+  },
+  "source_revision": "7472732",
+  "released": "2026-11-26"
+}
